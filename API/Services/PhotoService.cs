@@ -34,7 +34,7 @@ public class PhotoService : IPhotoService
             uploadResult = await _cloudinary.UploadAsync(uploadParams);
         }
 
-         return uploadResult;
+        return uploadResult;
     }
 
     public async Task<DeletionResult> DeletePhotoAsync(string publicId)
@@ -42,15 +42,5 @@ public class PhotoService : IPhotoService
         var deleteParams = new DeletionParams(publicId);
 
         return await _cloudinary.DestroyAsync(deleteParams);
-    }
-
-    Task<ImageUploadResult> IPhotoService.AddPhotoAsync(IFormFile file)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<DeletionResult> IPhotoService.DeletePhotoAsync(string publicId)
-    {
-        throw new NotImplementedException();
     }
 }
