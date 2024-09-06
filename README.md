@@ -1,3 +1,9 @@
+For employer thinking that i can use Angular professional through my code here
+
+No i'm fucking not. I didn't even listen or learn a single shit about Angular
+
+That's how much i fucking hate it. However i do listen and learn C# well and
+
 For anyone thinking this is actually a Dating (web) App. It is not
 
 It's just a web app that i follow tutorial on some random ass Udemy Course
