@@ -10,14 +10,17 @@ namespace API.Data;
 
 public class UserRepository(DataContext context, IMapper mapper) : IUserRepository
 {
-    public Task<MemberDto?> GetMemberAsync(string username)
+    public async Task<MemberDto?> GetMemberAsync(string username)
     {
-        throw new NotImplementedException();
+        return await context.Users
+            .Where(x => x.UserName == username)
+            .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
     }
 
     public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
     {
-         var query = context.Users.AsQueryable();
+        var query = context.Users.AsQueryable();
 
         query = query.Where(x => x.UserName != userParams.CurrentUsername);
 
@@ -39,13 +42,7 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
 
         return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(mapper.ConfigurationProvider), 
             userParams.PageNumber, userParams.PageSize);
-    }
-
-    public async Task<IEnumerable<MemberDto>> GetMembersAsync()
-    {
-        return await context.Users
-            .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
-            .ToListAsync();
+            
     }
 
     public async Task<AppUser?> GetUserByIdAsync(int id)
